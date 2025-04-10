@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quotes Page</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Daily Wisdom</h1>
+    <div id="quote-box">
+      <p id="quote-text"></p>
+      <div class="buttons">
+        <button onclick="prevQuote()">Previous</button>
+        <button onclick="nextQuote()">Next</button>
+      </div>
+    </div>
+
+    <div id="disqus_thread"></div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Update Disqus thread based on current quote
+    function loadDisqus(id) {
+      if (window.DISQUS) {
+        DISQUS.reset({
+          reload: true,
+          config: function () {
+            this.page.identifier = id;
+            this.page.url = window.location.href + '#' + id;
+          }
+        });
+      } else {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://YOUR_DISQUS_SHORTNAME.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+    }
+  </script>
+</body>
+</html>
